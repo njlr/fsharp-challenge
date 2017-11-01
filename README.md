@@ -76,8 +76,8 @@ The API should expose the same commands as in Section 2, however this time the s
 ## General Guidelines
 
 * Write idiomatic F#.
-* Do not optimise unecessarily. Absolute performance is not important for this exercise; however appropriate data structures and alogorithms should be chosen given the specification
-* Do not overengineer. Simplicity and elegance is favoured over unecessary complexity.
+* Do not optimise unnecessarily. Absolute performance is not important for this exercise; however appropriate data structures and alogorithms should be chosen given the specification
+* Do not overengineer. Simplicity and elegance is favoured over unnecessary complexity.
 * Platform and tools are not important. Target whichever framework you want.
 
 ## Questions
