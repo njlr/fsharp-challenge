@@ -13,21 +13,15 @@ module CellularAutomata =
     let isOnBoard x y b =
       x >= 0I && y >= 0I && x < b.width && y < b.height
 
-    // creates a new cellular automata with all 'dead' cells for the given x and y dimensions
-    //val empty: x:bigint -> y:bigint -> CellularAutomata
     let empty width height = {
       width = width;
       height = height;
       alive = Set.empty
     }
 
-    // returns true if the cell at the specified coordinates is 'live'
-    //val get: x:bigint -> y:bigint -> CellularAutomata -> bool*/
     let get x y b =
       b.alive |> Set.contains (x, y)
 
-    // returns a cellular automata with the cell set to the specified state at the specified coordinates
-    //val set: x:bigint -> y:bigint -> bool -> CellularAutomata -> CellularAutomata*/
     let set x y v b =
       if isOnBoard x y b then
         let op = if v then Set.add else Set.remove
@@ -46,5 +40,47 @@ module CellularAutomata =
       seq { for y in 0I .. b.height - 1I -> showRow y + "\n" } |>
         Seq.fold (+) ""
 
-    // returns a cellular automata that is advanced to the next state
-    //val next: CellularAutomata -> CellularAutomata*/
+    // Convenience function to get all the neighbours of a cell
+    let neighbours x y b =
+      Set.empty |>
+      Set.add (x - 1I, y - 1I) |>
+      Set.add (x, y - 1I) |>
+      Set.add (x + 1I, y - 1I) |>
+      Set.add (x - 1I, y) |>
+      Set.add (x + 1I, y) |>
+      Set.add (x - 1I, y + 1I) |>
+      Set.add (x, y + 1I) |>
+      Set.add (x + 1I, y + 1I) |>
+      Set.filter (fun (x, y) -> isOnBoard x y b)
+
+    let next b =
+
+      // Computes the next state of a given cell.
+      let cellNext x y =
+        let countLivingNeighbours x y =
+          neighbours x y b |>
+          Set.intersect b.alive |>
+          Set.count
+        match (get x y b, countLivingNeighbours x y) with
+          | (true, 2)
+          | (true, 3) -> true
+          | (true, _) -> false
+          | (false, 3) -> true
+          | (false, _) -> false
+
+      // For efficiency reasons, we do not want to update every cell.
+      // We only need to update every live cell and its neighbours.
+      let cellsToCheck =
+        b.alive |>
+        Set.map (fun (x, y) -> (neighbours x y b) |> Set.add (x, y)) |>
+        Set.fold (+) Set.empty
+
+      // Function from the coordinates of a cell to the transform required
+      // to update the board.
+      let transform x y =
+        fun b -> set x y (cellNext x y) b
+
+      cellsToCheck |>
+        Set.toSeq |>
+        Seq.map (fun (x, y) -> transform x y) |>
+        Seq.fold (fun s f -> f s) b
