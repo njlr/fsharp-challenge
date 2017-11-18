@@ -24,7 +24,7 @@ module CellularAutomata =
     // returns true if the cell at the specified coordinates is 'live'
     //val get: x:bigint -> y:bigint -> CellularAutomata -> bool*/
     let get x y b =
-      b.alive |> Set.contains(x, y)
+      b.alive |> Set.contains (x, y)
 
     // returns a cellular automata with the cell set to the specified state at the specified coordinates
     //val set: x:bigint -> y:bigint -> bool -> CellularAutomata -> CellularAutomata*/
@@ -34,6 +34,17 @@ module CellularAutomata =
         { b with alive = op (x, y) b.alive }
       else
         b
+
+    let show b =
+      let showCell x y =
+        if b.alive |> Set.contains (x, y) then
+          "█"
+        else
+          "░"
+      let showRow y = seq { for x in 0I .. b.width - 1I -> showCell x y } |>
+                      Seq.fold (+) ""
+      seq { for y in 0I .. b.height - 1I -> showRow y + "\n" } |>
+        Seq.fold (+) ""
 
     // returns a cellular automata that is advanced to the next state
     //val next: CellularAutomata -> CellularAutomata*/

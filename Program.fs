@@ -4,9 +4,10 @@ open System.Numerics
 
 [<EntryPoint>]
 let main argv =
-    Console.WriteLine "Hello World"
-    let x = CellularAutomata.empty 3I 3I |>
-            CellularAutomata.set 1I 2I true |>
-            CellularAutomata.get 1I 2I |>
-            Console.WriteLine
+    let x = CellularAutomata.empty 9I 9I |>
+            CellularAutomata.set 0I 0I true |>
+            CellularAutomata.set 1I 0I true |>
+            CellularAutomata.set 3I 2I true |>
+            CellularAutomata.set 5I 6I true
+    x |> CellularAutomata.show |> Console.WriteLine
     0
