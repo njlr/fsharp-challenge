@@ -2,23 +2,31 @@
 
 ## Build Instructions
 
-Fetch dependencies: 
+### Fetch Dependencies
 
 ```bash=
 mono .paket/paket.bootstrapper.exe
 mono .paket/paket.exe install
 ```
 
-Build: 
+### Build
 
 ```bash=
 ./build.sh
 ```
 
-Run: 
+### Run
+
+#### CLI 
 
 ```bash=
 dotnet ./Conway/bin/Debug/netcoreapp2.0/Conway.dll 
+```
+
+#### Server
+
+```bash=
+dotnet ./ConwayServer/bin/Debug/netcoreapp2.0/ConwayServer.dll 
 ```
 
 ## Dev Tools
