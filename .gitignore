@@ -25,7 +25,7 @@
 *.lib
 *.sbr
 *.sdf
-ipch/ 
+ipch/
 *.dbmdl
 *.csproj.user
 *.cache
@@ -57,3 +57,5 @@ contracts/**
 !.paket/paket.exe
 
 paket-files/**
+
+.fake
