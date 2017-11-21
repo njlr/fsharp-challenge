@@ -29,6 +29,8 @@ dotnet ./Conway/bin/Debug/netcoreapp2.0/Conway.dll
 dotnet ./ConwayServer/bin/Debug/netcoreapp2.0/ConwayServer.dll 
 ```
 
+The API is described in `ConwayServer/API.md`. 
+
 ## Dev Tools
 
 The recommended tooling is [Visual Studio Code](https://code.visualstudio.com/) with the [Ionide](http://ionide.io/) extenstion. 
