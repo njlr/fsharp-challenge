@@ -29,7 +29,7 @@ dotnet ./Conway/bin/Debug/netcoreapp2.0/Conway.dll
 dotnet ./ConwayServer/bin/Debug/netcoreapp2.0/ConwayServer.dll 
 ```
 
-The API is described in `ConwayServer/API.md`. 
+The API is described in [`ConwayServer/API.md`](/ConwayServer/API.md). 
 
 ## Dev Tools
 
