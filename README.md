@@ -2,6 +2,8 @@
 
 ## Build Instructions
 
+The code has been tested on macOS. You will need F#, .NET Core _and_ Mono installed. 
+
 ### Fetch Dependencies
 
 ```bash=

@@ -11,7 +11,7 @@ open Conway.CLI
 // For a more complex app, a library would be appropriate. 
 let serializeBoard (board : CellularAutomata.Board) = 
   let serializePosition (x, y) = 
-    "{ x: " + string x + ", y: " + string y + "}"
+    "{ \"x\": " + string x + ", \"y\": " + string y + " }"
   let serializeAlive x = 
     "[ " + 
     (
@@ -21,9 +21,9 @@ let serializeBoard (board : CellularAutomata.Board) =
       String.concat ", "
     ) + 
     " ]"
-  "{ width: " + 
-  string board.width + ", height: " + 
-  string board.height + ", alive: " + 
+  "{ \"width\": " + 
+  string board.width + ", \"height\": " + 
+  string board.height + ", \"alive\": " + 
   (serializeAlive board.alive) + " }"
 
 [<EntryPoint>]
@@ -40,7 +40,7 @@ let main argv =
 
   let handleShow (name : string) = request (fun _ ->
     match state |> Map.tryFind name with
-    | Some x -> x |> serializeBoard |> OK
+    | Some x -> x |> serializeBoard |> OK >=> Writers.setMimeType "application/json"
     | None -> RequestErrors.NOT_FOUND "Automata not found")
 
   let handleSet (name : string) = request (fun r -> 
