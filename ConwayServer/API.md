@@ -5,11 +5,6 @@
 Returns a JSON blob of the whole state of a given automata. 
 If the name does not exist, then return a 404
 
-## GET /:name/cell?x=0&y=0
-
-Returns a JSON blob of a given cell of a given automata
-If the name does not exist, then return a 404
-
 ## PUT /:name?width=16&height=16
 
 Add or overwrite an empty board to the state under the given name
